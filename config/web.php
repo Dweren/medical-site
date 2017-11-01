@@ -16,11 +16,13 @@ $config = [
         'user' => [
             'class' => 'dektrium\user\Module',
             'enableUnconfirmedLogin' => false,
+            'enableFlashMessages' => false,
             'confirmWithin' => 21600,
             'cost' => 12,
             'admins' => ['admin'],
             'modelMap' => [
                 'RegistrationForm' => 'app\models\RegistrationForm',
+                'User' => 'app\models\User',
             ],
         ],
     ],
@@ -64,14 +66,12 @@ $config = [
             ],
         ],
         'db' => $db,
-        /*
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
             ],
         ],
-        */
     ],
     'params' => $params,
 ];
