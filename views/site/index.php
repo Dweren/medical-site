@@ -17,7 +17,7 @@ $this->title = 'My Yii Application';
 
         <? }else{ ?>
 
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Записаться на прием</a></p>
+        <p><?= Html::a('Записаться на приём', ['/reception/index'], ['class'=>'btn btn-lg btn-success']) ?></p>
 
         <? } ?>
 

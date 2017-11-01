@@ -2,8 +2,10 @@
 
 namespace app\controllers;
 
+use app\models\ReceptionForm;
 use Yii;
 use app\models\Reception;
+use app\models\Doctor;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -41,7 +43,7 @@ class ReceptionController extends Controller
         }
 
         $dataProvider = new ActiveDataProvider([
-            'query' => Reception::find(),
+            'query' => Doctor::find(),
         ]);
 
         return $this->render('index', [
@@ -49,11 +51,6 @@ class ReceptionController extends Controller
         ]);
     }
 
-    /**
-     * Displays a single Reception model.
-     * @param integer $id
-     * @return mixed
-     */
     public function actionView($id)
     {
         return $this->render('view', [
@@ -61,17 +58,16 @@ class ReceptionController extends Controller
         ]);
     }
 
-    /**
-     * Creates a new Reception model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
     public function actionCreate()
     {
-        $model = new Reception();
+        $model = new ReceptionForm();
+        //set default values
+        $model->user_id = Yii::$app->user->id;
+        $model->date = date("Y-m-d");
+        $model->load(Yii::$app->request->get());
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(Yii::$app->homeUrl);
         }
 
         return $this->render('create', [

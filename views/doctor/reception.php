@@ -19,13 +19,8 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             'fio:ntext',
             'position:ntext',
-            [
-                'attribute' => 'Запись на приём',
-                'format' => 'raw',
-                'value' => function ($model) {
-                    return '<div>'.Html::a('Записаться на приём', ['/reception/create', 'Reception[doctor_id]'=>$model->id], ['class'=>'btn btn-small btn-success']).'</div>';
-                },
-            ],
+
+            ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
     <?php Pjax::end(); ?>

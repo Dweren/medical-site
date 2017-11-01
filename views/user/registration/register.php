@@ -11,6 +11,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\jui\DatePicker;
 
 /**
  * @var yii\web\View $this
@@ -38,7 +39,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 <?= $form->field($model, 'username') ?>
 
-                <?= $form->field($model, 'birthday') ?>
+                <?= $form->field($model, 'birthday')->widget(\yii\jui\DatePicker::classname(), [
+                    'language' => 'ru',
+                    'dateFormat' => 'yyyy-MM-dd',
+                ])->label('День рождения') ?>
 
                 <?php if ($module->enableGeneratingPassword == false): ?>
                     <?= $form->field($model, 'password')->passwordInput() ?>
