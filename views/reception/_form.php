@@ -7,13 +7,6 @@ use yii\widgets\ActiveForm;
 /* @var $model app\models\Reception */
 /* @var $form yii\widgets\ActiveForm */
 
-
-
-$doctor = \app\models\Doctor::findOne($model->doctor_id) or \app\models\Doctor::find()->one();
-$params = [
-    'options' => $doctor->occupiedHoursFormatted($model->date)
-];
-
 ?>
 
 <div class="reception-form">
@@ -25,14 +18,20 @@ $params = [
     <?= $form->field($model, 'date')->widget(\yii\jui\DatePicker::classname(), [
         'language' => 'ru',
         'dateFormat' => 'yyyy-MM-dd',
-    ])->label('Дата') ?>
+        'options' => [
+            'onChange' => '$.get(
+                "'. Yii::$app->urlManager->createUrl('reception/hours').'",
+                {ReceptionForm: {date: $(this).val(), doctor_id: $("#receptionform-doctor_id").val()}}
+                , function(data) { $( ".field-receptionform-time" ).html( data ); })',
+        ],
 
-    <?= $form->field($model, 'time')->dropDownList(app\models\Doctor::workingHours(), $params)->label('Время'); ?>
+    ])->label('Дата'); ?>
+
+    <?= $this->render('_hours', ['model'=>$model, 'form'=>$form]); ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
-
 </div>

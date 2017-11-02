@@ -12,6 +12,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use app\models\ReceptionSearch;
+use yii\widgets\ActiveForm;
 
 /**
  * ReceptionController implements the CRUD actions for Reception model.
@@ -90,6 +91,17 @@ class ReceptionController extends Controller
         }
         return $this->render('create', [
             'model' => $model,
+        ]);
+    }
+
+    public function actionHours()
+    {
+        $model = new ReceptionForm();
+        $model->date = date("Y-m-d");
+        $model->load(Yii::$app->request->get());
+        return $this->renderPartial('_hours', [
+            'model' => $model,
+            'form' => ActiveForm::begin(),
         ]);
     }
 
