@@ -8,4 +8,7 @@ return [
     'Create Reception' => 'Записаться на приём',
     'Receptions' => 'Приёмы',
     'Started At' => 'Начало в',
+    'Save' => 'Сохранить',
+    'Update' => 'Редактировать',
+    'Delete' => 'Удалить',
 ];

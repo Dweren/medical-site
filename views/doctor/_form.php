@@ -12,9 +12,9 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'fio')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'fio') ?>
 
-    <?= $form->field($model, 'position')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'position') ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>

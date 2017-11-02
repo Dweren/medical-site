@@ -15,10 +15,10 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php Pjax::begin(); ?>
 
     <?= GridView::widget([
+        'filterModel' => $searchModel,
         'dataProvider' => $dataProvider,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
             [
                 'attribute' => 'doctor_id',
                 'value' => 'doctor.fio',
@@ -26,12 +26,19 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'position',
                 'value' => 'doctor.position',
+                'label' => 'Должность',
             ],
             [
                 'attribute' => 'user_id',
                 'value' => 'user.username',
+                'visible' => Yii::$app->user->identity->isAdmin ? '1':'0',
             ],
-            'started_at',
+            [
+                'attribute' => 'started_at',
+                'value' => function ($model) {
+                    return date('Y-m-d H:i', strtotime($model->started_at));
+                },
+            ],
         ],
     ]); ?>
     <?php Pjax::end(); ?>

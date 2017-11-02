@@ -15,6 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php Pjax::begin(); ?>
 
     <?= GridView::widget([
+        'filterModel' => $searchModel,
         'dataProvider' => $dataProvider,
         'columns' => [
             'fio:ntext',

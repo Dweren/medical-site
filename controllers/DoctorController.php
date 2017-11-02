@@ -5,11 +5,11 @@ namespace app\controllers;
 use Yii;
 use app\models\Doctor;
 use app\components\AccessRule;
-use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use app\models\DoctorSearch;
 
 /**
  * DoctorController implements the CRUD actions for Doctor model.
@@ -52,11 +52,11 @@ class DoctorController extends Controller
      */
     public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => Doctor::find(),
-        ]);
+        $searchModel = new DoctorSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
+            'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }

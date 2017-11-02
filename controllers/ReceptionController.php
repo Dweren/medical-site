@@ -11,6 +11,7 @@ use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\models\ReceptionSearch;
 
 /**
  * ReceptionController implements the CRUD actions for Reception model.
@@ -64,13 +65,14 @@ class ReceptionController extends Controller
 
     public function actionHistory()
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => Reception::find(),
-        ]);
+        $searchModel = new ReceptionSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
         if (!Yii::$app->user->identity->isAdmin){
             $dataProvider->query->where(['user_id' => Yii::$app->user->id]);
         }
         return $this->render('history', [
+            'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
