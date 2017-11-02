@@ -4,10 +4,12 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Doctor;
+use app\components\AccessRule;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 
 /**
  * DoctorController implements the CRUD actions for Doctor model.
@@ -24,6 +26,21 @@ class DoctorController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
+                ],
+            ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'ruleConfig' => [
+                    'class' => AccessRule::className(),
+                ],
+                'only' => ['create', 'update', 'index'],
+                'rules' => [
+                    // allow admin users
+                    [
+                        'allow' => true,
+                        'roles' => ['admin'],
+                    ],
+                    // everything else is denied
                 ],
             ],
         ];

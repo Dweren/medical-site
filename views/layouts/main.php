@@ -43,6 +43,7 @@ AppAsset::register($this);
     if (Yii::$app->user->isGuest) {
         array_push($navItems,['label' => 'Вход', 'url' => ['/user/security/login']],['label' => 'Регистрация', 'url' => ['/user/registration/register']]);
     } else {
+        array_push($navItems,['label' => 'История записей', 'url' => ['/reception/history']]);
         array_push($navItems,['label' => 'Предварительная запись', 'url' => ['/reception/index']]);
         array_push($navItems,['label' => 'Выход (' . Yii::$app->user->identity->username . ')',
                 'url' => ['/user/security/logout'],

@@ -7,6 +7,7 @@ use Yii;
 use app\models\Reception;
 use app\models\Doctor;
 use yii\data\ActiveDataProvider;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -28,20 +29,23 @@ class ReceptionController extends Controller
                     'delete' => ['POST'],
                 ],
             ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
         ];
     }
-
     /**
      * Lists all Reception models.
      * @return mixed
      */
     public function actionIndex()
     {
-        if (Yii::$app->user->isGuest) {
-            Yii::$app->session->setFlash('warning', 'Для записи на прием Вам необходимо войти в свой личный кабинет.');
-            return $this->redirect(['/user/security/login']);
-        }
-
         $dataProvider = new ActiveDataProvider([
             'query' => Doctor::find(),
         ]);
@@ -55,6 +59,17 @@ class ReceptionController extends Controller
     {
         return $this->render('view', [
             'model' => $this->findModel($id),
+        ]);
+    }
+
+    public function actionHistory()
+    {
+        $dataProvider = new ActiveDataProvider([
+            'query' => Reception::find(),
+        ]);
+
+        return $this->render('history', [
+            'dataProvider' => $dataProvider,
         ]);
     }
 

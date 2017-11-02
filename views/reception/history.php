@@ -6,17 +6,13 @@ use yii\widgets\Pjax;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Receptions');
+$this->title = Yii::t('app', 'История записей');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="reception-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php Pjax::begin(); ?>
-
-    <p>
-        <?= Html::a(Yii::t('app', 'Create Reception'), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -27,10 +23,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'doctor_id',
                 'value' => 'doctor.fio',
             ],
-            'user_id',
+            [
+                'attribute' => 'user_id',
+                'value' => 'user.username',
+            ],
             'started_at',
-
-            ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
     <?php Pjax::end(); ?>
