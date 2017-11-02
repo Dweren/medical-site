@@ -36,14 +36,8 @@ class ReceptionForm extends Model
 
     public function formName()
     {
-        return 'reception-form';
+        return 'ReceptionForm';
     }
-
-    public function started_at()
-    {
-        return 'reception-form';
-    }
-
     public function save()
     {
         if (!$this->validate()) {

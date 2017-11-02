@@ -24,6 +24,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => 'doctor.fio',
             ],
             [
+                'attribute' => 'position',
+                'value' => 'doctor.position',
+            ],
+            [
                 'attribute' => 'user_id',
                 'value' => 'user.username',
             ],

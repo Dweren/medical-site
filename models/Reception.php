@@ -52,17 +52,11 @@ class Reception extends \yii\db\ActiveRecord
         ];
     }
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
     public function getDoctor()
     {
         return $this->hasOne(Doctor::className(), ['id' => 'doctor_id']);
     }
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
     public function getUser()
     {
         return $this->hasOne(User::className(), ['id' => 'user_id']);

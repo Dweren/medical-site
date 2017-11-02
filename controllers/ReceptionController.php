@@ -67,7 +67,9 @@ class ReceptionController extends Controller
         $dataProvider = new ActiveDataProvider([
             'query' => Reception::find(),
         ]);
-
+        if (!Yii::$app->user->identity->isAdmin){
+            $dataProvider->query->where(['user_id' => Yii::$app->user->id]);
+        }
         return $this->render('history', [
             'dataProvider' => $dataProvider,
         ]);
@@ -84,7 +86,6 @@ class ReceptionController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(Yii::$app->homeUrl);
         }
-
         return $this->render('create', [
             'model' => $model,
         ]);

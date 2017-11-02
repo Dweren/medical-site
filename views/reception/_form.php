@@ -7,14 +7,12 @@ use yii\widgets\ActiveForm;
 /* @var $model app\models\Reception */
 /* @var $form yii\widgets\ActiveForm */
 
-$items=[
-    '9.00'=>'9.00',
-    '9.30'=>'9.30',
-    '10.00'=>'10.00',
-    '10.30'=>'10.30'
-];
 
-$params = [];
+
+$doctor = \app\models\Doctor::findOne($model->doctor_id) or \app\models\Doctor::find()->one();
+$params = [
+    'options' => $doctor->occupiedHoursFormatted($model->date)
+];
 
 ?>
 
@@ -29,7 +27,7 @@ $params = [];
         'dateFormat' => 'yyyy-MM-dd',
     ])->label('Дата') ?>
 
-    <?= $form->field($model, 'time')->dropDownList($items, $params)->label('Время'); ?>
+    <?= $form->field($model, 'time')->dropDownList(app\models\Doctor::workingHours(), $params)->label('Время'); ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>
