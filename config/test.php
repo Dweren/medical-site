@@ -7,12 +7,26 @@ $db = require __DIR__ . '/test_db.php';
  */
 return [
     'id' => 'basic-tests',
+    'language' => 'ru',
     'basePath' => dirname(__DIR__),  
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
-    ],  
-    'language' => 'en-US',
+    ],
+    'modules' => [
+        'user' => [
+            'class' => 'dektrium\user\Module',
+            'enableUnconfirmedLogin' => false,
+            'enableFlashMessages' => false,
+            'confirmWithin' => 21600,
+            'cost' => 12,
+            'admins' => ['admin'],
+            'modelMap' => [
+                'RegistrationForm' => 'app\models\RegistrationForm',
+                'User' => 'app\models\User',
+            ],
+        ],
+    ],
     'components' => [
         'db' => $db,
         'mailer' => [
@@ -22,7 +36,17 @@ return [
             'basePath' => __DIR__ . '/../web/assets',
         ],
         'urlManager' => [
-            'showScriptName' => true,
+            'enablePrettyUrl' => false,
+            'showScriptName' => false,
+            'rules' => [
+            ],
+        ],
+        'i18n' => [
+            'translations' => [
+                '*' => [
+                    'class' => 'yii\i18n\PhpMessageSource'
+                ],
+            ],
         ],
         'user' => [
             'identityClass' => 'app\models\User',
@@ -36,7 +60,14 @@ return [
                 'domain' => 'localhost',
             ],
             */
-        ],        
+        ],
+        'view' => [
+            'theme' => [
+                'pathMap' => [
+                    '@dektrium/user/views' => '@app/views/user'
+                ],
+            ],
+        ],
     ],
     'params' => $params,
 ];

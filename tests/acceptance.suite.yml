@@ -2,8 +2,10 @@ class_name: AcceptanceTester
 modules:
     enabled:
         - WebDriver:
-            url: http://127.0.0.1:8080/
-            browser: firefox
+            url: http://localhost/medical-site/web/index-test.php
+            port: 9515
+            browser: chrome
+            window_size: false
         - Yii2:
             part: orm
             entryScript: index-test.php
