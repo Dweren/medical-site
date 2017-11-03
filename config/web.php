@@ -25,6 +25,14 @@ $config = [
                 'RegistrationForm' => 'app\models\RegistrationForm',
                 'User' => 'app\models\User',
             ],
+            'controllerMap' => [
+                'security' => [
+                    'class' => \dektrium\user\controllers\SecurityController::className(),
+                    'on ' . \dektrium\user\controllers\SecurityController::EVENT_AFTER_LOGIN => function ($e) {
+                        Yii::info('User logged: '.$e->form->login, 'security');
+                    }
+                ],
+            ],
         ],
     ],
     'components' => [
@@ -49,6 +57,11 @@ $config = [
                 [
                     'class' => 'yii\log\FileTarget',
                     'levels' => ['error', 'warning'],
+                ],
+                [
+                    'class' => 'yii\log\FileTarget',
+                    'levels' => ['info'],
+                    'categories' => ['security','error', 'warning'],
                 ],
             ],
         ],
