@@ -8,10 +8,10 @@ $db = require __DIR__ . '/test_db.php';
 return [
     'id' => 'basic-tests',
     'language' => 'ru',
-    'basePath' => dirname(__DIR__),  
+    'basePath' => dirname(__DIR__),
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
-        '@npm'   => '@vendor/npm-asset',
+        '@npm' => '@vendor/npm-asset',
     ],
     'modules' => [
         'user' => [
@@ -32,7 +32,7 @@ return [
         'mailer' => [
             'useFileTransport' => true,
         ],
-        'assetManager' => [            
+        'assetManager' => [
             'basePath' => __DIR__ . '/../web/assets',
         ],
         'urlManager' => [
@@ -50,7 +50,7 @@ return [
         ],
         'user' => [
             'identityClass' => 'app\models\User',
-        ],        
+        ],
         'request' => [
             'cookieValidationKey' => 'test',
             'enableCsrfValidation' => false,

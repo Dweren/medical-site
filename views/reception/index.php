@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
+
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
@@ -24,7 +25,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'Запись на приём',
                 'format' => 'raw',
                 'value' => function ($model) {
-                    return '<div>'.Html::a('Записаться на приём', ['/reception/create', 'ReceptionForm[doctor_id]'=>$model->id], ['class'=>'btn btn-small btn-success']).'</div>';
+                    return '<div>' . Html::a('Записаться на приём',
+                        ['/reception/create', 'ReceptionForm[doctor_id]' => $model->id],
+                        ['class' => 'btn btn-small btn-success']) . '</div>';
                 },
             ],
         ],

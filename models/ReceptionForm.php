@@ -1,6 +1,7 @@
 <?php
 
 namespace app\models;
+
 use app\models\Reception;
 use yii\base\Model;
 use Yii;
@@ -38,6 +39,7 @@ class ReceptionForm extends Model
     {
         return 'ReceptionForm';
     }
+
     public function save()
     {
         if (!$this->validate()) {
@@ -46,7 +48,7 @@ class ReceptionForm extends Model
 
         $model = new Reception;
         $model->setAttributes($this->attributes);
-        $timestamp = strtotime($this->date.' '.$this->time);
+        $timestamp = strtotime($this->date . ' ' . $this->time);
         $model->started_at = date("Y-m-d H:i:s", $timestamp);
 
         if (!$model->save()) {
@@ -58,7 +60,8 @@ class ReceptionForm extends Model
 
         $doctor = Doctor::findOne($this->doctor_id);
 
-        Yii::$app->session->setFlash('info', "Вы записались на прием. Доктор: {$doctor->fio}. Время: {$model->started_at}.");
+        Yii::$app->session->setFlash('info',
+            "Вы записались на прием. Доктор: {$doctor->fio}. Время: {$model->started_at}.");
 
         return true;
     }

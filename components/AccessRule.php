@@ -1,7 +1,8 @@
 <?php
 namespace app\components;
 
-class AccessRule extends \yii\filters\AccessRule {
+class AccessRule extends \yii\filters\AccessRule
+{
 
     protected function matchRole($user)
     {

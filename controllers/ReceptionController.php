@@ -42,6 +42,7 @@ class ReceptionController extends Controller
             ],
         ];
     }
+
     /**
      * Lists all Reception models.
      * @return mixed
@@ -54,6 +55,7 @@ class ReceptionController extends Controller
 
         return $this->render('index', [
             'dataProvider' => $dataProvider,
+            'searchModel' => null,
         ]);
     }
 
@@ -69,7 +71,7 @@ class ReceptionController extends Controller
         $searchModel = new ReceptionSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        if (!Yii::$app->user->identity->isAdmin){
+        if (!Yii::$app->user->identity->isAdmin) {
             $dataProvider->query->where(['user_id' => Yii::$app->user->id]);
         }
         return $this->render('history', [

@@ -11,15 +11,16 @@ $this->title = 'My Yii Application';
     <div class="jumbotron">
         <p class="lead">Добро пожаловать на сайт нашей клиники!</p>
 
-        <? if (Yii::$app->user->isGuest) { ?>
+        <?php if (Yii::$app->user->isGuest) { ?>
 
-        <p>Для записи на прием к доктору Вам сначала необходимо <?= Html::a('войти', ['/user/security/login']) ?><a href=""></a> в свой личный кабинет.</p>
+            <p>Для записи на прием к доктору Вам сначала необходимо <?= Html::a('войти', ['/user/security/login']) ?><a
+                    href=""></a> в свой личный кабинет.</p>
 
-        <? }else{ ?>
+        <?php } else { ?>
 
-        <p><?= Html::a('Записаться на приём', ['/reception/index'], ['class'=>'btn btn-lg btn-success']) ?></p>
+            <p><?= Html::a('Записаться на приём', ['/reception/index'], ['class' => 'btn btn-lg btn-success']) ?></p>
 
-        <? } ?>
+        <?php } ?>
 
     </div>
 </div>

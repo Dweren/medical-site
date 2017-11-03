@@ -34,8 +34,20 @@ class Reception extends \yii\db\ActiveRecord
             [['doctor_id', 'user_id'], 'integer'],
             [['started_at'], 'safe'],
             [['started_at', 'doctor_id'], 'unique', 'targetAttribute' => ['started_at', 'doctor_id']],
-            [['doctor_id'], 'exist', 'skipOnError' => true, 'targetClass' => Doctor::className(), 'targetAttribute' => ['doctor_id' => 'id']],
-            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
+            [
+                ['doctor_id'],
+                'exist',
+                'skipOnError' => true,
+                'targetClass' => Doctor::className(),
+                'targetAttribute' => ['doctor_id' => 'id']
+            ],
+            [
+                ['user_id'],
+                'exist',
+                'skipOnError' => true,
+                'targetClass' => User::className(),
+                'targetAttribute' => ['user_id' => 'id']
+            ],
         ];
     }
 

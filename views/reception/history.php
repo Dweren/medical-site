@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
+
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
@@ -31,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'user_id',
                 'value' => 'user.username',
-                'visible' => Yii::$app->user->identity->isAdmin ? '1':'0',
+                'visible' => Yii::$app->user->identity->isAdmin ? '1' : '0',
             ],
             [
                 'attribute' => 'started_at',
