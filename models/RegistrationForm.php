@@ -18,7 +18,6 @@ class RegistrationForm extends BaseRegistrationForm
             'usernameLength' => ['username', 'string', 'min' => 3, 'max' => 255],
             'usernamePattern' => ['username', 'match', 'pattern' => $user::$usernameRegexp],
             'usernameRequired' => ['username', 'required'],
-            'birthdayRequired' => ['birthday', 'required'],
             'usernameUnique' => [
                 'username',
                 'unique',
@@ -38,6 +37,10 @@ class RegistrationForm extends BaseRegistrationForm
             // password rules
             'passwordRequired' => ['password', 'required', 'skipOnEmpty' => $this->module->enableGeneratingPassword],
             'passwordLength' => ['password', 'string', 'min' => 6, 'max' => 72],
+            // birthday rules
+            'birthdayRequired' => ['birthday', 'required'],
+            ['birthday', 'date', 'format'=>'yyyy-mm-dd'],
+            ['birthday', 'validateDate'],
         ];
     }
 
@@ -47,7 +50,24 @@ class RegistrationForm extends BaseRegistrationForm
             'email' => Yii::t('user', 'Email'),
             'username' => Yii::t('user', 'Username'),
             'password' => Yii::t('user', 'Password'),
-            'birthday' => 'Birthday',
+            'birthday' => Yii::t('user', 'День рождения'),
         ];
+    }
+
+    public function validateDate()
+    {
+        if (strtotime($this->birthday) > time()) {
+            $this->addError('birthday', '"День рождения не может быть в будущем!"');
+        }
+
+        $date_pieces = explode("-", $this->birthday);
+
+        if(($date_pieces[1] > 12 || $date_pieces[1] == '00')) {
+            $this->addError('birthday', '"Не верный формат месяца"');
+        }
+
+        if(($date_pieces[2] > date("t", mktime(0, 0, 0, $date_pieces[1], 1, $date_pieces[0])) || $date_pieces[2] == '00')) {
+            $this->addError('birthday', '"Не верный формат дня"');
+        }
     }
 }

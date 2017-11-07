@@ -26,7 +26,7 @@ class Doctor extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['fio', 'position'], 'string'],
+            [['fio', 'position'], 'required'],
         ];
     }
 
